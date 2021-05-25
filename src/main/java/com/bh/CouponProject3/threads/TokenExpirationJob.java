@@ -23,8 +23,8 @@ public class TokenExpirationJob {
 		ArtUtils.printThreadHeadline();
 		ArtUtils.insertToTable("TOKEN DELETION JOB ==> Before deletion: ", tokenManager.getMap());
 		tokenManager.getMap().entrySet() // testing time
-				.removeIf(entrySet -> (entrySet.getValue().getTimeStamp() < new Date().getTime() - (1000 * 15))
-						|| (entrySet.getValue().getTimeStamp() > (new Date().getTime()) + 1000 * 60 * 30));
+				.removeIf(entrySet -> (entrySet.getValue().getExpiredTime() < new Date().getTime() - (1000 * 15))
+						|| (entrySet.getValue().getExpiredTime() > (new Date().getTime()) + 1000 * 60 * 30));
 		ArtUtils.insertToTable("TOKEN DELETION JOB ==> After deletion: ", tokenManager.getMap());
 		System.out.println("\t\t\t\t" + ArtUtils.getSmaily() + "   ---   " + ArtUtils.getSmaily());
 		System.out.println();

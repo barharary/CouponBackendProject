@@ -31,9 +31,8 @@ public class AspectAnnotations {
 			String tokenId = (String) parameters[0];
 			tokenManager.isTokenExists(tokenId);
 			ClientType clientTypeFromAnnotation = m.getMethod().getAnnotation(TokenCheckAndUpdate.class).clientType();
-			long timeStamp = tokenManager.getMap().get(tokenId).getTimeStamp();
 			tokenManager.isServiceTypeCorrect(tokenId, clientTypeFromAnnotation);
-			tokenManager.isTokenExpaired(timeStamp);
+			tokenManager.isTokenExpaired(tokenId);
 
 		}
 	}
@@ -41,12 +40,14 @@ public class AspectAnnotations {
 	@After("@annotation(TokenCheckAndUpdate)")
 	public void updateTimeStamp(JoinPoint joinPoint) throws SecurityException {
 		Object[] parameters = joinPoint.getArgs();
-		// MethodSignature m = (MethodSignature) joinPoint.getSignature();
-		if (parameters[0] instanceof String) {
+		MethodSignature m = (MethodSignature) joinPoint.getSignature();
+		if (parameters[0] instanceof String && m.getParameterNames()[0].equals("tokenId")) {
+			System.out.println("parameters[0] instanceof:  "+parameters[0].getClass().getSimpleName() + "  " + "getParameterNames()[0] = " +m.getParameterNames()[0] );
 			String tokenId = (String) parameters[0];
 			tokenManager.updateTimeStamp(tokenId);
+
 		}
-		System.out.println("map after evry methods");
+		System.out.println("TEST: tokenMap after evry request  web");
 		tokenManager.getMap().keySet().forEach(System.out::println);
 
 	}

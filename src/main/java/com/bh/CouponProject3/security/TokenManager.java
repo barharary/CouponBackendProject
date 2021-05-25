@@ -43,9 +43,11 @@ public class TokenManager {
 
 	}
 
-	public void isTokenExpaired(long time) throws SecurityException {
-		if (time < (new Date().getTime() - (1000 * 60 * 15))/* || time > new Date().getTime()+ (1000 * 60 * 10) */) { // 15
-																														// min..
+	public void isTokenExpaired(String tokenId) throws SecurityException {
+		long expiredTime = map.get(tokenId).getExpiredTime();
+		if (expiredTime < (new Date().getTime()
+				- (1000 * 60 * 15))/* || time > new Date().getTime()+ (1000 * 60 * 10) */) { // 15
+			map.remove(tokenId); 
 			throw new SecurityException("nu nu nu.. Your token id is out of date.");
 		}
 	}
@@ -53,7 +55,7 @@ public class TokenManager {
 	public void updateTimeStamp(String tokenId) {
 		long time = new Date().getTime();
 		time += (1000 * 60 * 10); // extra time token is good
-		getMap().get(tokenId).setTimeStamp(time);
+		getMap().get(tokenId).setExpiredTime(time);
 	}
 
 	public void isAdminServiceCorrect(String tokenId) throws SecurityException {

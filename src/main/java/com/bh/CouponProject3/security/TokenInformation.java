@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TokenInformation {
-
-	private long timeStamp;
+//
+	private long expiredTime;
 	private ClientService clientService;
 
 	@Override
 	public String toString() {
-		return "\t| timeStamp: " + timeStamp + "\t| " + clientService.getClass().getSimpleName() + "\t\t|";
+		return "\t| timeStamp: " + expiredTime + "\t| " + clientService.getClass().getSimpleName() + "\t\t|";
 	}
 
 }
