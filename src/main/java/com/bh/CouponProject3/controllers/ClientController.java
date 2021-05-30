@@ -30,7 +30,7 @@ public abstract class ClientController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> LoginForToken(@RequestHeader String email, @RequestHeader String password,
-			/* @PathVariable() */ ClientType clientType) throws LoginException, CompanyException, CustomerException {
+			@RequestHeader ClientType clientType) throws LoginException, CompanyException, CustomerException {
 		ClientService clientService = loginManager.login(email, password, clientType);
 		return new ResponseEntity<>(tokenManager.createTokenReturnTokenId(clientService), HttpStatus.CREATED);
 
@@ -40,9 +40,9 @@ public abstract class ClientController {
 	public ResponseEntity<?> logOut(@RequestHeader String tokenId)
 			throws LoginException, CompanyException, CustomerException, SecurityException {
 		tokenManager.isTokenExists(tokenId);
-		
+		tokenManager.isTokenExpaired(tokenId);
 		tokenManager.getMap().remove(tokenId);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT); // TODO raise to annotation exists&expired
 
 	}
 

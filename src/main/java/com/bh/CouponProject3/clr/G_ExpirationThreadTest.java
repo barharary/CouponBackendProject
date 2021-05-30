@@ -14,7 +14,7 @@ public class G_ExpirationThreadTest implements CommandLineRunner {
 	public void run(String... args) {
 		// System.out.println("I stop the thread.");
 		ArtUtils.printVvsHeadLine(
-				"Fill free to check all the code with Swagger or PostMan" + " " + ArtUtils.getSmaily(), 5);
+				"Feel free to check all the code with Swagger or PostMan" + " " + ArtUtils.getSmaily(), 5);
 
 	}
 

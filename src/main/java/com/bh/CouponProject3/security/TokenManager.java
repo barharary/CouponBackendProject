@@ -47,32 +47,32 @@ public class TokenManager {
 		long expiredTime = map.get(tokenId).getExpiredTime();
 		if (expiredTime < (new Date().getTime()
 				- (1000 * 60 * 15))/* || time > new Date().getTime()+ (1000 * 60 * 10) */) { // 15
-			map.remove(tokenId); 
+			map.remove(tokenId);
 			throw new SecurityException("nu nu nu.. Your token id is out of date.");
 		}
 	}
 
 	public void updateTimeStamp(String tokenId) {
 		long time = new Date().getTime();
-		time += (1000 * 60 * 10); // extra time token is good
+		time += (1000 * 60 * 15); // extra time token is good
 		getMap().get(tokenId).setExpiredTime(time);
 	}
 
 	public void isAdminServiceCorrect(String tokenId) throws SecurityException {
 		if (!(getService(tokenId) instanceof AdminService)) {
-			throw new SecurityException("nu nu nu.. Your client type does NOT have access to this action.");
+			throwClientException();
 		}
 	}
 
 	public void isCustomerServiceCorrect(String tokenId) throws SecurityException {
 		if (!(getService(tokenId) instanceof CustomerService)) {
-			throw new SecurityException("nu nu nu.. Your client type does NOT have access to this action.");
+			throwClientException();
 		}
 	}
 
 	public void isCompanyServiceCorrect(String tokenId) throws SecurityException {
 		if (!(getService(tokenId) instanceof CompanyService)) {
-			throw new SecurityException("nu nu nu.. Your client type does NOT have access to this action.");
+			throwClientException();
 		}
 
 	}
@@ -85,6 +85,11 @@ public class TokenManager {
 		} else if (clientType == ClientType.CUSTOMER) {
 			isCustomerServiceCorrect(tokenId); // Learn class cheking for all check mwthods
 		}
+
+	}
+
+	public void throwClientException() throws SecurityException {
+		throw new SecurityException("nu nu nu.. Your client type does NOT have access to this action.");
 
 	}
 

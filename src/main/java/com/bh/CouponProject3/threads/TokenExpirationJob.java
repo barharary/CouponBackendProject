@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class TokenExpirationJob {
 
 	private final TokenManager tokenManager;
-	private final long fixedRate = 1000 * 20; // for testing every 20 sec. token deletion if pass 15 sec from last
+	private final long fixedRate = 1000 *60* 20; // for testing every 20 sec. token deletion if pass 15 sec from last
 												// correct request
 
 	@Scheduled(fixedRate = fixedRate)
@@ -23,12 +23,12 @@ public class TokenExpirationJob {
 		ArtUtils.printThreadHeadline();
 		ArtUtils.insertToTable("TOKEN DELETION JOB ==> Before deletion: ", tokenManager.getMap());
 		tokenManager.getMap().entrySet() // testing time
-				.removeIf(entrySet -> (entrySet.getValue().getExpiredTime() < new Date().getTime() - (1000 * 15))
+				.removeIf(entrySet -> (entrySet.getValue().getExpiredTime() < new Date().getTime() - (1000 * 60))
 						|| (entrySet.getValue().getExpiredTime() > (new Date().getTime()) + 1000 * 60 * 30));
 		ArtUtils.insertToTable("TOKEN DELETION JOB ==> After deletion: ", tokenManager.getMap());
 		System.out.println("\t\t\t\t" + ArtUtils.getSmaily() + "   ---   " + ArtUtils.getSmaily());
 		System.out.println();
-		ArtUtils.printVvsHeadLine("Fill free to check this code with Swagger or PostMan" + " " + ArtUtils.getSmaily(),
+		ArtUtils.printVvsHeadLine("Feel free to check this code with Swagger or PostMan" + " " + ArtUtils.getSmaily(),
 				5);
 	}
 }

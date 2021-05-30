@@ -20,7 +20,7 @@ public enum Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int Value;
+	private int Value;
 
 	public int getValue() {
 		return Value;

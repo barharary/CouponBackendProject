@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class CouponExpirationJob {
 
 	private final CouponRepository couponRepository;
-	private final long fixedRate = 30000; // every 3o sec..
+	private final long fixedRate = 60000;  //very 3o sec..
 
 	@Scheduled(fixedRate = fixedRate)
 	public void run() {
@@ -25,7 +25,7 @@ public class CouponExpirationJob {
 		System.out.println("\t\t\t\t" + ArtUtils.getSmaily() + "   ---   " + ArtUtils.getSmaily());
 
 		System.out.println();
-		ArtUtils.printVvsHeadLine("Fill free to check this code with Swagger or PostMan" + " " + ArtUtils.getSmaily(),
+		ArtUtils.printVvsHeadLine("Feel free to check this code with Swagger or PostMan" + " " + ArtUtils.getSmaily(),
 				5);
 
 	}

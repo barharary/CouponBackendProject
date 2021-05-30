@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import com.bh.CouponProject3.utils.EntityJsonResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ import lombok.Singular;
 @NoArgsConstructor
 @Builder
 @Table(name = "companies")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityJsonResolver.class,scope = Company.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityJsonResolver.class, scope = Company.class)
 public class Company {
 
 	@Id
@@ -47,7 +48,7 @@ public class Company {
 
 	@Singular
 	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "company")
-	//@JsonIgnoreProperties("company")
+//	@JsonIgnoreProperties("company")
 	private List<Coupon> companyCoupons = new ArrayList<>();
 
 	@Override

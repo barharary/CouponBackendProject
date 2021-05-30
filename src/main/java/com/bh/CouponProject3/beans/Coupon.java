@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +35,7 @@ public class Coupon implements Comparable<Coupon> {
 	private int id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	// @JsonIgnoreProperties("companyCoupons")
+//	@JsonIgnoreProperties("companyCoupons")
 	@JsonIdentityReference(alwaysAsId = true)
 	private Company company;
 
@@ -66,7 +67,7 @@ public class Coupon implements Comparable<Coupon> {
 	@Override
 	public String toString() {
 		return "|" + id + "   |" + company.getId() + "\t       |" + category + "\t  |" //
-				+ couponTitle + "\t|" + couponDescription.substring(0, 12) + ".." + "\t|" + startDate.getDate() + "."
+				+ couponTitle + "\t|" + descriptionManipulation() + "\t|" + startDate.getDate() + "."
 				+ (startDate.getMonth() + 1) + "." + (startDate.getYear() + 1900)//
 				+ "\t|" + endDate.getDate() + "." + (endDate.getMonth() + 1) + "." + (endDate.getYear() + 1900) + "\t|"
 				+ amount + "\t|" + price + "\t|" + image + "\t|";
@@ -77,11 +78,10 @@ public class Coupon implements Comparable<Coupon> {
 		return (int) ((this.getId() - o.getId()));
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Coupon [id=" + id + ", company=" + company.getId() + ", category=" + category + ", couponTitle="
-//				+ couponTitle + ", couponDescription=" + couponDescription + ", startDate=" + startDate + ", endDate="
-//				+ endDate + ", amount=" + amount + ", price=" + price + ", image=" + image + "]";
-//	}
+	public String descriptionManipulation() {
+
+		return (couponDescription.length() < 12) ? couponDescription
+				: couponDescription.substring(0, 12) + "..";
+	}
 
 }

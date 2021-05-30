@@ -3,10 +3,12 @@ package com.bh.CouponProject3.utils;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerator.IdKey;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;
 
+@Component
 public class EntityJsonResolver implements ObjectIdResolver {
 
 	@Autowired

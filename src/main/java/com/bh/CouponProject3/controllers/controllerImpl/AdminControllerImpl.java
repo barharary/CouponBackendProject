@@ -39,7 +39,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 			throws CompanyException, SecurityException {
 		System.out.println(company);
 		((AdminService) tokenManager.getService(tokenId)).addCompany(company);
-		return new ResponseEntity<>(HttpStatus.CREATED); //TODO send to Swagger without able to add coupons.
+		return new ResponseEntity<>(HttpStatus.CREATED); //
 	}
 
 	@PutMapping("/UpdateCompany")
@@ -48,7 +48,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	public ResponseEntity<?> updateCompany(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestBody Company company) throws CompanyException, SecurityException {
 		((AdminService) tokenManager.getService(tokenId)).updateCompany(company);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);  //TODO send to Swagger without able to update coupons.
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);  //
 
 	}
 
@@ -84,7 +84,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	public ResponseEntity<?> addCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestBody Customer customer) throws CustomerException {
 		((AdminService) tokenManager.getService(tokenId)).addCustomer(customer);
-		return new ResponseEntity<>(HttpStatus.CREATED);  //TODO send to Swagger without able to update coupons.
+		return new ResponseEntity<>(HttpStatus.CREATED);  //
 
 
 	}
@@ -95,7 +95,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	public ResponseEntity<?> updateCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestBody Customer customer) throws CustomerException {
 		((AdminService) tokenManager.getService(tokenId)).updateCustomer(customer);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);  //TODO send to Swagger without able to update coupons.
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);  //
 
 	}
 

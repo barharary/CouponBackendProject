@@ -38,7 +38,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 		if (couponRepository.findByCouponTitleAndCompanyId(coupon.getCouponTitle(), this.companyId).isPresent()) {
 			throw new CouponException("Coupon Titled " + coupon.getCouponTitle() + " Already exists.");
 		}
-		couponRepository.save(coupon);
+		couponRepository.save(coupon); //TODO! it is possible to add coupon for another company
 
 	}
 

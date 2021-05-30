@@ -22,7 +22,6 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 	@Override
 	public boolean login(String email, String password) throws LoginException, CompanyException, CustomerException {
 		if (!(email.equals("admin@admin.com") && password.equals("admin"))) {
-			System.out.println((email == "admin@admin.com" && password == "admin"));
 			throw new LoginException("Incorrect email or password.");
 		}
 		return true;

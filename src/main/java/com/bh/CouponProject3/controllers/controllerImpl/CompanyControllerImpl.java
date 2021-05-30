@@ -22,6 +22,7 @@ import com.bh.CouponProject3.security.TokenManager;
 import com.bh.CouponProject3.security.login.ClientType;
 import com.bh.CouponProject3.security.login.LoginManager;
 import com.bh.CouponProject3.services.CompanyService;
+import com.bh.CouponProject3.utils.ArtUtils;
 
 @RestController
 @RequestMapping("company") // http://localhost:8080/company
@@ -36,12 +37,13 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> addCoupon(@RequestHeader(name = "tokenId") String tokenId, @RequestBody Coupon coupon)
 			throws CouponException {
-		System.out.println(coupon);
+		// System.out.println(coupon);
 		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
 		companyService.addCoupon(coupon);
 		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
-		return new ResponseEntity<>(HttpStatus.CREATED);  //TODO send to Swagger without able to update company nested details.
-
+		ArtUtils.insertToTable("get all coupons", companyService.getComapnyCoupons());
+		return new ResponseEntity<>(HttpStatus.CREATED); // 
+															// details.
 
 	}
 
@@ -53,7 +55,8 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
 		companyService.updateCoupon(coupon);
 		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT); //TODO send to Swagger without able to update company nested details.
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 
+															// nested details.
 
 	}
 
@@ -82,7 +85,8 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	@GetMapping("/getMyCompanyCouponsByCategory")
-	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId,@RequestHeader Category category) {
+	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId,
+			@RequestHeader Category category) {
 		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
 		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
 		return new ResponseEntity<>(((CompanyService) tokenManager.getService(tokenId)).getComapnyCoupons(category),
@@ -92,7 +96,8 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	@Override
 	@GetMapping("/getMyCompanyCouponsByMaxPrice")
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
-	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId,@RequestHeader double maxPrice) {
+	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId,
+			@RequestHeader double maxPrice) {
 		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
 		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
 		return new ResponseEntity<>(((CompanyService) tokenManager.getService(tokenId)).getComapnyCoupons(maxPrice),

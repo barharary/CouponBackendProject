@@ -22,30 +22,49 @@ public class LoginManager {
 	private final AdminService adminService;
 
 	@Autowired
-	ApplicationContext ctx;
+	private ApplicationContext ctx;
 
 	public ClientService login(String email, String password, ClientType clientType)
 			throws LoginException, CompanyException, CustomerException {
 
-		if (clientType.equals(ClientType.ADMIN)) {
-			if (((ClientService) adminService).login(email, password)) {
-				loginAsMessage(email, clientType);
-				return (ClientService) adminService;
-			}
-		} else if (clientType.equals(ClientType.CUSTOMER)) {
-			ClientService customerService = (ClientService) ctx.getBean(CustomerService.class);
-			customerService.login(email, password);
+		switch (clientType) {
+		case ADMIN:
+			((ClientService) adminService).login(email, password);
 			loginAsMessage(email, clientType);
-			return (ClientService) customerService;
-
-		} else if (clientType.equals(ClientType.COMPANY)) {
+			return (ClientService) adminService;
+		case COMPANY:
 			CompanyService companyService1 = ctx.getBean(CompanyService.class);
 			((ClientService) companyService1).login(email, password);
 			loginAsMessage(email, clientType);
 			return (ClientService) companyService1;
-
+		case CUSTOMER:
+			ClientService customerService = (ClientService) ctx.getBean(CustomerService.class);
+			customerService.login(email, password);
+			loginAsMessage(email, clientType);
+			return (ClientService) customerService;
+		default:
+			throw new LoginException("Problem with the login.");
 		}
-		throw new LoginException("Problem with the login.");
+
+//		if (clientType.equals(ClientType.ADMIN)) {
+//			if (((ClientService) adminService).login(email, password)) {
+//				loginAsMessage(email, clientType);
+//				return (ClientService) adminService;
+//			}
+//		} else if (clientType.equals(ClientType.CUSTOMER)) {
+//			ClientService customerService = (ClientService) ctx.getBean(CustomerService.class);
+//			customerService.login(email, password);
+//			loginAsMessage(email, clientType);
+//			return (ClientService) customerService;
+//
+//		} else if (clientType.equals(ClientType.COMPANY)) {
+//			CompanyService companyService1 = ctx.getBean(CompanyService.class);
+//			((ClientService) companyService1).login(email, password);
+//			loginAsMessage(email, clientType);
+//			return (ClientService) companyService1;
+//
+//		}
+//		throw new LoginException("Problem with the login.");
 
 	}
 
