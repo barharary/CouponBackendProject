@@ -1,5 +1,7 @@
 package com.bh.CouponProject3.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import com.bh.CouponProject3.beans.Company;
@@ -30,4 +32,6 @@ public interface AdminController {
 
 	ResponseEntity<?> getOneCustomer(String tokenId,int id) throws CustomerException, CompanyException, SecurityException;
 
+
+	
 }

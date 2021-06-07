@@ -1,8 +1,8 @@
 package com.bh.CouponProject3.beans;
 
-import java.util.Comparator;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,9 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bh.CouponProject3.exceptions.CouponException;
+import com.bh.CouponProject3.repository.CompanyRepository;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -34,9 +39,9 @@ public class Coupon implements Comparable<Coupon> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-//	@JsonIgnoreProperties("companyCoupons")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JsonIdentityReference(alwaysAsId = true)
+	@JsonIgnoreProperties("companyCoupons")
 	private Company company;
 
 	@Enumerated(EnumType.STRING)
@@ -80,8 +85,7 @@ public class Coupon implements Comparable<Coupon> {
 
 	public String descriptionManipulation() {
 
-		return (couponDescription.length() < 12) ? couponDescription
-				: couponDescription.substring(0, 12) + "..";
+		return (couponDescription.length() < 12) ? couponDescription : couponDescription.substring(0, 12) + "..";
 	}
 
 }

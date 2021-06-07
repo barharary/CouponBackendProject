@@ -8,11 +8,17 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator.IdKey;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 @Component
+@NoArgsConstructor
+@AllArgsConstructor
+//@RequiredArgsConstructor
 public class EntityJsonResolver implements ObjectIdResolver {
 
 	@Autowired
-	EntityManager entityManger;
+	private  EntityManager entityManger;
 
 	@Override
 	public void bindItem(IdKey id, Object pojo) {
@@ -20,19 +26,17 @@ public class EntityJsonResolver implements ObjectIdResolver {
 
 	@Override
 	public Object resolveId(IdKey id) {
-
+		
 		return entityManger.find(id.scope, id.key);
 	}
 
 	@Override
 	public ObjectIdResolver newForDeserialization(Object context) {
-		// FIXME please... Auto-generated method stub
 		return this;
 	}
 
 	@Override
 	public boolean canUseFor(ObjectIdResolver resolverType) {
-		// FIXME please... Auto-generated method stub
 		return false;
 	}
 

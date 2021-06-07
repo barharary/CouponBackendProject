@@ -49,9 +49,9 @@ public class E_CustomerTest implements CommandLineRunner {
 		int IdChooseCoupon2 = 2; // no left
 		Coupon coupon2 = couponsToChoose.stream().filter(c -> c.getId() == IdChooseCoupon2).collect(Collectors.toList())
 				.get(0);
-		int IdChooseCoupon5 = 5; // Date exception
-		Coupon coupon5 = couponsToChoose.stream().filter(c -> c.getId() == IdChooseCoupon5).collect(Collectors.toList())
-				.get(0);
+//		int IdChooseCoupon5 = 5; // Date exception
+//		Coupon coupon5 = couponsToChoose.stream().filter(c -> c.getId() == IdChooseCoupon5).collect(Collectors.toList())
+//				.get(0);
 		int IdChooseCoupon6 = 6;
 		Coupon coupon6 = couponsToChoose.stream().filter(c -> c.getId() == IdChooseCoupon6).collect(Collectors.toList())
 				.get(0);
@@ -63,12 +63,12 @@ public class E_CustomerTest implements CommandLineRunner {
 			System.out.println(e.getMessage());
 		}
 
-		ArtUtils.printXxsHeadLine("Purchase coupon Id " + IdChooseCoupon5 + " with \"Date exception\"", 1);
-		try {
-			customerService.purchaseCoupon(coupon5);
-		} catch (CouponException e) {
-			System.out.println(e.getMessage());
-		}
+//		ArtUtils.printXxsHeadLine("Purchase coupon Id " + IdChooseCoupon5 + " with \"Date exception\"", 1);
+//		try {
+//			customerService.purchaseCoupon(coupon5);
+//		} catch (CouponException e) {
+//			System.out.println(e.getMessage());
+//		}
 ////////////////////////////////////////////////////////////////////////// fall here i thnk
 		try {
 			customerService.purchaseCoupon(coupon4);

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.bh.CouponProject3.beans.Category;
@@ -75,7 +76,6 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
 		return customerRepository.findById(this.customerId)
 				.orElseThrow(() -> new CustomerException("Customer Id NOT found."));
 //		return customerRepository.getOne(this.customerId);
-
 	}
 
 	@Override

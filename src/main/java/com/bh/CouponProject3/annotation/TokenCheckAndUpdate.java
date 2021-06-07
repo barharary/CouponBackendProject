@@ -18,5 +18,8 @@ public @interface TokenCheckAndUpdate {
 
 	@Bean
 	ClientType clientType();
+	// ClientTypeIsMust = true/false default true
+	// before = true/false default true
+	// after = true/ false default true
 
 }

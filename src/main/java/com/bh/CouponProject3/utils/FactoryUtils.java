@@ -22,12 +22,6 @@ public class FactoryUtils {
 				.email("Doritos@d.com") //
 				.password("S34") //
 				.build();
-//		Coupon coupon = Coupon.builder().couponTitle("iAmTitle").couponDescription("Descritpion")
-//				.category(Category.TRIP).company(company).startDate(new Date()).endDate(new Date()).amount(20).price(50)
-//				.image("abc").build();
-
-//		company.setCompanyCoupons(Arrays.asList(coupon));
-
 		return company;
 	}
 
@@ -65,11 +59,11 @@ public class FactoryUtils {
 	public static Coupon bringOneCoupon() throws CompanyException {
 		// CompanyRepository companyRepository = ctx.getBean(CompanyRepository.class);
 		Coupon coupon = new Coupon();
-		AdminService adminService = ctx.getBean(AdminService.class);
-		Company company = adminService.getOneCompany(3);
-		coupon.setCompany(company);
+		//AdminService adminService = ctx.getBean(AdminService.class);
+		//Company company = adminService.getOneCompany(3);
+		
 		coupon.setCategory(Category.FOOD);
-		coupon.setCouponTitle("Free Joice");
+		coupon.setCouponTitle("BEST PRICE X");
 		coupon.setCouponDescription("this is a Wonder Coupon");
 		coupon.setStartDate(DateUtils.generateDateJava(2019, 2, 11));
 		coupon.setEndDate(DateUtils.generateDateJava(2022, 4, 12));

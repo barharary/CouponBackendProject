@@ -37,7 +37,11 @@ public class TokenManager {
 	}
 
 	public void isTokenExists(String tokenId) throws SecurityException {
+		System.out.println(map.get(tokenId));
+
 		if (map.get(tokenId) == null) {
+			System.out.println("1" + map.get(tokenId));
+
 			throw new SecurityException("nu nu nu.. Your token id not in the system.");
 		}
 

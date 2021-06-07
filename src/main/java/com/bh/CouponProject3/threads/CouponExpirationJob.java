@@ -17,7 +17,7 @@ public class CouponExpirationJob {
 	private final CouponRepository couponRepository;
 	private final long fixedRate = 60000;  //very 3o sec..
 
-	@Scheduled(fixedRate = fixedRate)
+//	@Scheduled(fixedRate = fixedRate)
 	public void run() {
 		ArtUtils.insertToTable("COUPON DELETION JOB ==> Before deletion: ", couponRepository.findAll());
 		couponRepository.deleteByEndDateBefore(new Date(new Date().getTime() - 1000 * 60 * 60 * 24));

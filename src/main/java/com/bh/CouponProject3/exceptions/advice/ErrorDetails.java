@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Component
 public class ErrorDetails {
+
 	private String key;
 	private String errorMessage;
 	private int errorCode;

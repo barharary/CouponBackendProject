@@ -15,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 public class TokenExpirationJob {
 
 	private final TokenManager tokenManager;
-	private final long fixedRate = 1000 *60* 20; // for testing every 20 sec. token deletion if pass 15 sec from last
-												// correct request
+	private final long fixedRate = 1000 * 60 * 20; // for testing every 20 sec. token deletion if pass 15 sec from last
+													// correct request
 
 	@Scheduled(fixedRate = fixedRate)
 	public void run() {

@@ -35,17 +35,26 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 
 	@Override
 	public void addCoupon(Coupon coupon) throws CouponException {
+		
+		if(coupon.getCompany().getId() != this.companyId) {
+			throw new CouponException("You try to ADD coupon that NOT your own companyId. change the companyId of the coupon to your own.");
+		}
+		
 		if (couponRepository.findByCouponTitleAndCompanyId(coupon.getCouponTitle(), this.companyId).isPresent()) {
 			throw new CouponException("Coupon Titled " + coupon.getCouponTitle() + " Already exists.");
-		}
-		couponRepository.save(coupon); //TODO! it is possible to add coupon for another company
+		} 
+		couponRepository.save(coupon); 
 
 	}
 
 	@Override
 	public void updateCoupon(Coupon coupon) throws CouponException {
-		if (!couponRepository.existsByIdAndCompanyId(coupon.getId(), this.companyId) || //
-				coupon.getCompany().getId() != this.companyId) {
+	
+		if(coupon.getCompany().getId() != this.companyId) {
+			throw new CouponException("You try to UPDATE coupon that NOT your own companyId. change the companyId of the coupon to your own.");
+		}
+		
+		if (!couponRepository.existsByIdAndCompanyId(coupon.getId(), this.companyId)) {
 			throw new CouponException("\n"
 					+ "Cannot change couponId and CompanyId OR you dont have this couponId in your company coupon list.");
 		}
@@ -57,6 +66,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 		if (!couponRepository.existsByIdAndCompanyId(couponId, this.companyId)) {
 			throw new CouponException("Coupon Id " + couponId + " does not in your coupon List.");
 		}
+
 		couponRepository.deleteById(couponId);
 	}
 

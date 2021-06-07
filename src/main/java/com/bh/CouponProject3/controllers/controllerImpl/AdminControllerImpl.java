@@ -2,6 +2,7 @@ package com.bh.CouponProject3.controllers.controllerImpl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,12 +27,14 @@ import com.bh.CouponProject3.security.login.LoginManager;
 import com.bh.CouponProject3.services.AdminService;
 
 @RestController
-@RequestMapping("admin") // ==  http://localhost:8080/admin
+@RequestMapping("admin") // == http://localhost:8080/admin
+@CrossOrigin
 public class AdminControllerImpl extends ClientController implements AdminController {
 
 	public AdminControllerImpl(LoginManager loginManager, TokenManager tokenManager, AdminService adminService) {
 		super(loginManager, tokenManager);
 	}
+
 	@PostMapping("/addCompany")
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
@@ -48,7 +51,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	public ResponseEntity<?> updateCompany(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestBody Company company) throws CompanyException, SecurityException {
 		((AdminService) tokenManager.getService(tokenId)).updateCompany(company);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);  //
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT); //
 
 	}
 
@@ -61,7 +64,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	@GetMapping("/getAllCompanies")
+	@GetMapping("/allCompanies")
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> getAllCompanies(@RequestHeader(name = "tokenId") String tokenId)
@@ -70,7 +73,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	}
 
 	@Override
-	@GetMapping("/getOneCompany/{companyId}")
+	@GetMapping("/OneCompany/{companyId}")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> getOneCompany(@RequestHeader(name = "tokenId") String tokenId, @PathVariable int companyId)
 			throws CompanyException, SecurityException {
@@ -84,8 +87,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	public ResponseEntity<?> addCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestBody Customer customer) throws CustomerException {
 		((AdminService) tokenManager.getService(tokenId)).addCustomer(customer);
-		return new ResponseEntity<>(HttpStatus.CREATED);  //
-
+		return new ResponseEntity<>(HttpStatus.CREATED); //
 
 	}
 
@@ -95,7 +97,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	public ResponseEntity<?> updateCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestBody Customer customer) throws CustomerException {
 		((AdminService) tokenManager.getService(tokenId)).updateCustomer(customer);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);  //
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT); //
 
 	}
 
@@ -109,15 +111,14 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	}
 
 	@Override
-	@GetMapping("/getAllCustomers")
+	@GetMapping("/AllCustomers")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
-	public ResponseEntity<?> getAllCustomers(@RequestHeader(name = "tokenId") String tokenId)
-			throws SecurityException {
+	public ResponseEntity<?> getAllCustomers(@RequestHeader(name = "tokenId") String tokenId) throws SecurityException {
 		return new ResponseEntity<>(((AdminService) tokenManager.getService(tokenId)).getAllCustomers(), HttpStatus.OK);
 	}
 
 	@Override
-	@GetMapping("/getOneCustomer/{customerId}")
+	@GetMapping("/OneCustomer/{customerId}")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> getOneCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@PathVariable int customerId) throws CustomerException, CompanyException, SecurityException {

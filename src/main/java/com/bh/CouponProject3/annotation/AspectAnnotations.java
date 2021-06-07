@@ -33,7 +33,6 @@ public class AspectAnnotations {
 			ClientType clientTypeFromAnnotation = m.getMethod().getAnnotation(TokenCheckAndUpdate.class).clientType();
 			tokenManager.isServiceTypeCorrect(tokenId, clientTypeFromAnnotation);
 			tokenManager.isTokenExpaired(tokenId);
-
 		}
 	}
 
@@ -42,13 +41,13 @@ public class AspectAnnotations {
 		Object[] parameters = joinPoint.getArgs();
 		MethodSignature m = (MethodSignature) joinPoint.getSignature();
 		if (parameters[0] instanceof String && m.getParameterNames()[0].equals("tokenId")) {
-			System.out.println("parameters[0] instanceof:  "+parameters[0].getClass().getSimpleName() + "  " + "getParameterNames()[0] = " +m.getParameterNames()[0] );
+//			System.out.println("parameters[0] instanceof:  "+parameters[0].getClass().getSimpleName() + "  " + "getParameterNames()[0] = " +m.getParameterNames()[0] );
 			String tokenId = (String) parameters[0];
 			tokenManager.updateTimeStamp(tokenId);
 
 		}
-		System.out.println("TEST: tokenMap after evry request  web");
-		tokenManager.getMap().keySet().forEach(System.out::println);
+//		System.out.println("TEST: tokenMap after evry request web:");
+//		tokenManager.getMap().keySet().forEach(System.out::println);
 
 	}
 

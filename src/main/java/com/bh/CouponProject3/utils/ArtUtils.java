@@ -15,6 +15,37 @@ public class ArtUtils {
 	public final static String BOLD_LINE = "|***************************************************************************************************************|";
 	public final static String REGULAR_LINE = "|--------------------------------------------------------------------------------------------------|";
 
+	
+	
+	private static int barTestingHeaderCounter = 0;
+	public static void barTestingHeader(String input) {
+		System.out.println();
+		String verticalLines = "///////////////////////////////////////////////////" //
+				+ "//////////////////////////////////////////////////////////////";
+		String middle = "     " + "Test # " //
+				+ (++barTestingHeaderCounter) //
+				+ "      " + input + "     ";
+		int l = verticalLines.length();
+		int m = middle.length();
+		String left = "";
+		for (int i = 0; i < (l - m) / 2; i++) {
+			left += ("/");
+		}
+		String right = left;
+		if ((l - m) % 2 != 0) {
+			right += ("/");
+		}
+		System.out.println();
+		System.out.println(verticalLines);
+		System.out.print(left);
+		System.out.print(middle);
+		System.out.println(right);
+		System.out.println(verticalLines);
+		System.out.println();
+	}
+
+	
+	
 	public static void printPrimaryData() {
 
 		System.out.println("                                            \r\n"

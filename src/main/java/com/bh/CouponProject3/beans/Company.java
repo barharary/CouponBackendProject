@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 import com.bh.CouponProject3.utils.EntityJsonResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +33,8 @@ import lombok.Singular;
 @Builder
 @Table(name = "companies")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityJsonResolver.class, scope = Company.class)
+@JsonPropertyOrder(value = {"name","email","password","companyCoupons","id"},alphabetic = true )
+//@JsonPropertyOrder(alphabetic = false)
 public class Company {
 
 	@Id
@@ -47,8 +51,9 @@ public class Company {
 	private String password;
 
 	@Singular
-	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "company")
-//	@JsonIgnoreProperties("company")
+	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REFRESH, CascadeType.PERSIST,
+			CascadeType.REMOVE }, mappedBy = "company")
+	@JsonIgnoreProperties("company")
 	private List<Coupon> companyCoupons = new ArrayList<>();
 
 	@Override

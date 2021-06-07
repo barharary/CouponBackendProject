@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,6 @@ import com.bh.CouponProject3.security.TokenManager;
 import com.bh.CouponProject3.security.login.ClientType;
 import com.bh.CouponProject3.security.login.LoginManager;
 import com.bh.CouponProject3.services.CompanyService;
-import com.bh.CouponProject3.utils.ArtUtils;
 
 @RestController
 @RequestMapping("company") // http://localhost:8080/company
@@ -37,13 +37,8 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> addCoupon(@RequestHeader(name = "tokenId") String tokenId, @RequestBody Coupon coupon)
 			throws CouponException {
-		// System.out.println(coupon);
-		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
-		companyService.addCoupon(coupon);
-		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
-		ArtUtils.insertToTable("get all coupons", companyService.getComapnyCoupons());
-		return new ResponseEntity<>(HttpStatus.CREATED); // 
-															// details.
+		((CompanyService) tokenManager.getService(tokenId)).addCoupon(coupon);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 
 	}
 
@@ -52,10 +47,8 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> updateCoupon(@RequestHeader(name = "tokenId") String tokenId, @RequestBody Coupon coupon)
 			throws CouponException {
-		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
-		companyService.updateCoupon(coupon);
-		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 
+		((CompanyService) tokenManager.getService(tokenId)).updateCoupon(coupon);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT); //
 															// nested details.
 
 	}
@@ -63,43 +56,35 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	@Override
 	@DeleteMapping("/{id}")
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
-	public ResponseEntity<?> deleteCoupon(@RequestHeader(name = "tokenId") String tokenId, int Id)
+	public ResponseEntity<?> deleteCoupon(@RequestHeader(name = "tokenId") String tokenId, @PathVariable int id)
 			throws CouponException {
-		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
-		companyService.deleteCoupon(Id);
-		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
+		((CompanyService) tokenManager.getService(tokenId)).deleteCoupon(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
 	}
 
 	@Override
-	@GetMapping("/allMyCompanyCoupons")
+	@GetMapping("/myCoupons")
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId) throws CouponException {
-		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
-		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
 		return new ResponseEntity<>(((CompanyService) tokenManager.getService(tokenId)).getComapnyCoupons(),
 				HttpStatus.OK);
 	}
 
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
-	@GetMapping("/getMyCompanyCouponsByCategory")
+	@GetMapping("myCouponsByCategory")
 	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestHeader Category category) {
-		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
-		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
 		return new ResponseEntity<>(((CompanyService) tokenManager.getService(tokenId)).getComapnyCoupons(category),
 				HttpStatus.OK);
 	}
 
 	@Override
-	@GetMapping("/getMyCompanyCouponsByMaxPrice")
+	@GetMapping("/myCouponsByMaxPrice")
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestHeader double maxPrice) {
-		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
-		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
 		return new ResponseEntity<>(((CompanyService) tokenManager.getService(tokenId)).getComapnyCoupons(maxPrice),
 				HttpStatus.OK);
 	}
@@ -109,8 +94,6 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> getCompanyDetails(@RequestHeader(name = "tokenId") String tokenId)
 			throws CompanyException {
-		CompanyService companyService = ((CompanyService) tokenManager.getService(tokenId));
-		System.out.println("this is the CompanyId: " + companyService.getCompanyId());
 		return new ResponseEntity<>(((CompanyService) tokenManager.getService(tokenId)).getCompanyDetails(),
 				HttpStatus.OK);
 	}

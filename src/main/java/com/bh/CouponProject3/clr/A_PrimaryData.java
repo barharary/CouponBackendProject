@@ -172,18 +172,19 @@ public class A_PrimaryData implements CommandLineRunner {
 		coupon7.setPrice(50.0);
 		coupon7.setImage("Image");
 
-		Coupon coupon8 = new Coupon();
-		coupon8.setCompany(company3);
-		coupon8.setCategory(Category.FOOD);
-		coupon8.setCouponTitle("4 snack in 1");
-		coupon8.setCouponDescription("4 snack in 10 NIS from \"Egozi\", \"Teami\" and \"KifKef\"");
-		coupon8.setStartDate(new Date());
-		coupon8.setEndDate(DateUtils.generateDateJava(2020, 4, 16));
-		coupon8.setAmount(200);
-		coupon8.setPrice(50.0);
-		coupon8.setImage("Image");
+//		Coupon coupon8 = new Coupon();
+//		coupon8.setCompany(company3);
+//		coupon8.setCategory(Category.FOOD);
+//		coupon8.setCouponTitle("4 snack in 1");
+//		coupon8.setCouponDescription("4 snack in 10 NIS from \"Egozi\", \"Teami\" and \"KifKef\"");
+//		coupon8.setStartDate(new Date());
+//		coupon8.setEndDate(DateUtils.generateDateJava(2020, 4, 16));
+//		coupon8.setAmount(200);
+//		coupon8.setPrice(50.0);
+//		coupon8.setImage("Image");
 
-		couponRepository.saveAll(Arrays.asList(coupon1, coupon2, coupon3, coupon4, coupon5, coupon6, coupon7, coupon8));
+		couponRepository
+				.saveAll(Arrays.asList(coupon1, coupon2, coupon3, coupon4, coupon5, coupon6, coupon7 /* ,coupon8 */));
 ////////////////////////////////////////////////////////////////////////////////////////
 
 		List<Coupon> coupons1 = new ArrayList<>();

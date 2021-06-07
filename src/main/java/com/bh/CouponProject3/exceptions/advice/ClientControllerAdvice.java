@@ -12,7 +12,6 @@ import com.bh.CouponProject3.exceptions.CompanyException;
 import com.bh.CouponProject3.exceptions.CouponException;
 import com.bh.CouponProject3.exceptions.CustomerException;
 import com.bh.CouponProject3.exceptions.SecurityException;
-import com.bh.CouponProject3.security.login.LoginManager;
 
 @RestController
 @ControllerAdvice
@@ -22,15 +21,16 @@ public class ClientControllerAdvice {
 	@ExceptionHandler(value = { CustomerException.class, CouponException.class, CompanyException.class })
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorDetails handleErrors(Exception e) {
-		return new ErrorDetails("Data problem: ", e.getMessage(), 400);
+		return new ErrorDetails("Data problem: ", (e.getMessage() == null) ? "cause: " + e.getCause().getMessage() : "message: " + e.getMessage(), 400);
 	} // key,value,code
 
 	// SEC EXCEPTION Oy Vey!!!
 	@ExceptionHandler(value = { SecurityException.class, LoginException.class })
-
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public ErrorDetails handleErrors2(Exception e) {
-		return new ErrorDetails("Security Problem: ", e.getMessage(), 401);
-	}
+
+		return new ErrorDetails("Security Problem: ",
+				(e.getMessage() == null) ? "cause: " + e.getCause().getMessage() : "message: " + e.getMessage(), 401);
+	} // Learn why e.getMessage Is Null?
 
 }
