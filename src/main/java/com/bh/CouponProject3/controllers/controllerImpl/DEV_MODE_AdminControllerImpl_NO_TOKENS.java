@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bh.CouponProject3.annotation.TokenCheckAndUpdate;
 import com.bh.CouponProject3.beans.Company;
 import com.bh.CouponProject3.beans.Customer;
 import com.bh.CouponProject3.controllers.ClientController;
@@ -21,7 +20,6 @@ import com.bh.CouponProject3.exceptions.CompanyException;
 import com.bh.CouponProject3.exceptions.CustomerException;
 import com.bh.CouponProject3.exceptions.SecurityException;
 import com.bh.CouponProject3.security.TokenManager;
-import com.bh.CouponProject3.security.login.ClientType;
 import com.bh.CouponProject3.security.login.LoginManager;
 import com.bh.CouponProject3.services.AdminService;
 
@@ -40,15 +38,13 @@ public class DEV_MODE_AdminControllerImpl_NO_TOKENS extends ClientController {
 	}
 
 	@PostMapping("/addCompany")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> addCompany(@RequestBody Company company) throws CompanyException, SecurityException {
 
 		adminService.addCompany(company);
 		return new ResponseEntity<>(HttpStatus.CREATED); //
 	}
 
-	@PutMapping("/UpdateCompany")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
+	@PutMapping("/updateCompany")
 	public ResponseEntity<?> updateCompany(@RequestBody Company company) throws CompanyException, SecurityException {
 		adminService.updateCompany(company);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT); //
@@ -56,34 +52,29 @@ public class DEV_MODE_AdminControllerImpl_NO_TOKENS extends ClientController {
 	}
 
 	@DeleteMapping("/deleteCompanyX/{companyId}")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> deleteCompany(@PathVariable int companyId) throws CompanyException, SecurityException {
 		adminService.deleteCompany(companyId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping("/allCompanies")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> getAllCompanies() throws CompanyException, SecurityException {
 		return new ResponseEntity<>(adminService.getAllCompanies(), HttpStatus.OK); // 200
 	}
 
-	@GetMapping("/OneCompany/{companyId}")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
+	@GetMapping("/oneCompany/{companyId}")
 	public ResponseEntity<?> getOneCompany(@PathVariable int companyId) throws CompanyException, SecurityException {
 		return new ResponseEntity<>(adminService.getOneCompany(companyId), HttpStatus.OK);
 	}
 
 	@PostMapping("/addCustomer")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> addCustomer(@RequestBody Customer customer) throws CustomerException {
 		adminService.addCustomer(customer);
 		return new ResponseEntity<>(HttpStatus.CREATED); //
 
 	}
 
-	@PutMapping("/UpdateCustomer")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
+	@PutMapping("/updateCustomer")
 	public ResponseEntity<?> updateCustomer(@RequestBody Customer customer) throws CustomerException {
 		adminService.updateCustomer(customer);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT); //
@@ -91,20 +82,17 @@ public class DEV_MODE_AdminControllerImpl_NO_TOKENS extends ClientController {
 	}
 
 	@DeleteMapping("/deleteCompany/{customerId}")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> deleteCustomer(@PathVariable int customerId) throws CustomerException, SecurityException {
 		adminService.deleteCustomer(customerId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	@GetMapping("/AllCustomers")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
+	@GetMapping("/allCustomers")
 	public ResponseEntity<?> getAllCustomers() throws SecurityException {
 		return new ResponseEntity<>(adminService.getAllCustomers(), HttpStatus.OK);
 	}
 
-	@GetMapping("/OneCustomer/{customerId}")
-	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
+	@GetMapping("/oneCustomer/{customerId}")
 	public ResponseEntity<?> getOneCustomer(@PathVariable int customerId)
 			throws CustomerException, CompanyException, SecurityException {
 		return new ResponseEntity<>(adminService.getOneCustomer(customerId), HttpStatus.OK);

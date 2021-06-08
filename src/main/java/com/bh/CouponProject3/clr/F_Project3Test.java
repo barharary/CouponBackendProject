@@ -83,18 +83,6 @@ public class F_Project3Test implements CommandLineRunner {
 ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////GET ALL COMPANIES ///////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
-		Object object = "aaa";
-		Map<String, String> mapa = new HashMap<>();
-	HttpHeaders headres1 = new HttpHeaders();
-	headres1.add("aa", "bb");
-		HttpEntity<?> httpEntity1 = new HttpEntity<>(object, headres1);
-		// Object object = restTemplate.exchange(url,verb.PUT , httpEntity
-		// ,Object.class).getBody();
-		// return restTemplate.exchange(url, verb, httpEntity, Object.class);
-
-		ResponseEntity<?> a = restTemplate.exchange("aaa", HttpMethod.POST, httpEntity1, Object.class);
-		// return null;
-
 		ArtUtils.barTestingHeader("Get all companies");
 
 		String allCompaniesURL = localhostURL + "/admin/allCompanies";

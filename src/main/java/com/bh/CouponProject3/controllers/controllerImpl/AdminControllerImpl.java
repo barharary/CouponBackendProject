@@ -55,7 +55,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 
 	}
 
-	@DeleteMapping("/deleteCompanyX/{companyId}")
+	@DeleteMapping("/deleteCompany/{companyId}")
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> deleteCompany(@RequestHeader(name = "tokenId") String tokenId, @PathVariable int companyId)
@@ -102,7 +102,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	}
 
 	@Override
-	@DeleteMapping("/deleteCompany/{customerId}")
+	@DeleteMapping("/deleteCustomer/{customerId}")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> deleteCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@PathVariable int customerId) throws CustomerException, SecurityException {
