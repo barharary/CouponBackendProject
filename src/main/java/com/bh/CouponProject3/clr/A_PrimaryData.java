@@ -63,40 +63,64 @@ public class A_PrimaryData implements CommandLineRunner {
 				.password("4321") //
 				.build();
 
-		companyReposetory.saveAll(Arrays.asList(company1, company2, company3, company4, company5));
+		Company company6 = Company.builder() //
+				.name("mariaDB") //
+				.email("maria@db.com") //
+				.password("1234") //
+				.build();
+
+		companyReposetory.saveAll(Arrays.asList(company1, company2, company3, company4, company5, company6));
 		////////////////////////////////////////////////////////
 
 		Customer customer1 = Customer.builder() //
-				.firstName("Moshe") //
-				.lastName("Zveda") //
+				.firstName("Jovani") //
+				.lastName("Roso") //
 				.email("MosheZv@gmail.com") //
 				.password("4321").build();
 
 		Customer customer2 = Customer.builder() //
-				.firstName("David") //
-				.lastName("Ezra") //
+				.firstName("Yair") //
+				.lastName("Netanyahu") //
 				.email("DavidEzra@gmail.com") //
 				.password("4321").build();
 
 		Customer customer3 = Customer.builder() //
-				.firstName("Bar") //
-				.lastName("Shalom") //
+				.firstName("Yuval") //
+				.lastName("HaMebulbal") //
 				.email("BarShalom@gmail.com") //
 				.password("4321").build();
 
 		Customer customer4 = Customer.builder() //
-				.firstName("Kobi") //
-				.lastName("Shasha") //
+				.firstName("Ayelet") //
+				.lastName("Shaked") //
 				.email("KobiShasha@gmail.com") //
 				.password("4321").build();
 
 		Customer customer5 = Customer.builder() //
-				.firstName("Zer") //
-				.lastName("Hula") //
+				.firstName("Mc") //
+				.lastName("Karolina") //
 				.email("ZerHula@gmail.com") //
 				.password("4321").build();
 
-		customerRepository.saveAll(Arrays.asList(customer1, customer2, customer3, customer4, customer5));
+		Customer customer6 = Customer.builder() //
+				.firstName("Salim") //
+				.lastName("Tuama") //
+				.email("bar@gmail.com") //
+				.password("1234").build();
+		
+		Customer customer7 = Customer.builder() //
+				.firstName("Lionel") //
+				.lastName("Messi") //
+				.email("bar@gmail.com") //
+				.password("1234").build();
+
+		Customer customer8 = Customer.builder() //
+				.firstName("Bar") //
+				.lastName("Harary") //
+				.email("bar@gmail.com") //
+				.password("1234").build();
+
+		customerRepository.saveAll(Arrays.asList(customer1, customer2, customer3, customer4, customer5, customer6,customer7,customer8));
 
 		//////////////////////////////////////////////
 
@@ -195,7 +219,7 @@ public class A_PrimaryData implements CommandLineRunner {
 
 		List<Coupon> coupons2 = new ArrayList<>();
 		coupons2.add(coupon1);
-		company2.setCompanyCoupons(coupons2);
+		company2.setCoupons(coupons2);
 		companyReposetory.saveAndFlush(company2);
 
 		ArtUtils.printPrimaryData();

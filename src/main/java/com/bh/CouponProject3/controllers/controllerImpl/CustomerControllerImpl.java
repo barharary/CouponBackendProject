@@ -32,7 +32,7 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	}
 
 	@Override
-	@GetMapping("/AllMyCustomerCoupons")
+	@GetMapping("/all")
 	@TokenCheckAndUpdate(clientType = ClientType.CUSTOMER)
 	public ResponseEntity<?> getMyCustomerCoupon(@RequestHeader(name = "tokenId") String tokenId) {
 		CustomerService customerService = ((CustomerService) tokenManager.getService(tokenId));
@@ -42,7 +42,7 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	} 
 
 	@Override
-	@GetMapping("/MyCustomerCouponsByCategory")
+	@GetMapping("/category")
 	@TokenCheckAndUpdate(clientType = ClientType.CUSTOMER)
 	public ResponseEntity<?> getMyCustomerCoupon(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestHeader Category category) {
@@ -53,7 +53,7 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	}
 
 	@Override
-	@GetMapping("/MyCustomerCouponsByMaxPrice")
+	@GetMapping("/maxPrice")
 	@TokenCheckAndUpdate(clientType = ClientType.CUSTOMER)
 	public ResponseEntity<?> getMyCustomerCoupon(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestHeader double maxPrice) {
@@ -64,7 +64,7 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	}
 
 	@Override
-	@GetMapping("/myCustomerDetails")
+	@GetMapping("/details")
 	@TokenCheckAndUpdate(clientType = ClientType.CUSTOMER)
 	public ResponseEntity<?> getCustomerDetails(@RequestHeader(name = "tokenId") String tokenId)
 			throws CustomerException {
@@ -75,7 +75,7 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	}
 
 	@Override
-	@GetMapping("/CouponsAvilable")
+	@GetMapping("/toChoose")
 	@TokenCheckAndUpdate(clientType = ClientType.CUSTOMER)
 	public ResponseEntity<?> getListOfCouponToChooseFrom(@RequestHeader(name = "tokenId") String tokenId) {
 		CustomerService customerService = ((CustomerService) tokenManager.getService(tokenId));

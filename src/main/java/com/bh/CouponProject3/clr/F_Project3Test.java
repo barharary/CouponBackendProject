@@ -61,7 +61,7 @@ public class F_Project3Test implements CommandLineRunner {
 		adminLoginHeader.add("ClientType", ClientType.ADMIN.name());
 		HttpEntity<?> httpEntity = new HttpEntity<>(AdminLoginBody, adminLoginHeader);
 		ResponseEntity<LoginResponse> responseEntity = restTemplate.//
-				exchange(adminRegisterURL, HttpMethod.POST, httpEntity, LoginResponse.class); // NOT
+				exchange(adminRegisterURL, HttpMethod.POST, httpEntity, LoginResponse.class);
 		HttpStatus adminTokenIdHttpStatus = responseEntity.getStatusCode();
 		LoginResponse adminTokenIdLoginResponse = (LoginResponse) responseEntity.getBody();
 		String adminTokenId = adminTokenIdLoginResponse.getTokenId();
@@ -82,22 +82,22 @@ public class F_Project3Test implements CommandLineRunner {
 
 ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////GET ALL COMPANIES ///////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////
-		ArtUtils.barTestingHeader("Get all companies");
-
-		String allCompaniesURL = localhostURL + "/admin/allCompanies";
-
-		HttpHeaders adminTokenIdheader = new HttpHeaders();
-		adminTokenIdheader.add("tokenId", adminTokenId);
-		HttpEntity<?> allCompanieshttpEntity = new HttpEntity<>(adminTokenIdheader);
-
-		ArtUtils.printVvsHeadLine("ALL COMPANIES", 1);
-		ResponseEntity<Company[]> AllCompaniesResponseEntity = restTemplate.//
-				exchange(allCompaniesURL, HttpMethod.GET, allCompanieshttpEntity, Company[].class); // NOT
-		System.out.println(AllCompaniesResponseEntity.getStatusCode());
-		ArtUtils.insertToTable("All Companies: ", Arrays.asList(AllCompaniesResponseEntity.getBody()));
-
-		// TODO admin methods Rest...
+//////////////////////////////////////////////////////////////////////////////////////
+//		ArtUtils.barTestingHeader("Get all companies");
+//
+//		String allCompaniesURL = localhostURL + "/company/all";
+//
+//		HttpHeaders adminTokenIdheader = new HttpHeaders();
+//		adminTokenIdheader.add("tokenId", adminTokenId);
+//		HttpEntity<?> allCompanieshttpEntity = new HttpEntity<>(adminTokenIdheader);
+//
+//		ArtUtils.printVvsHeadLine("ALL COMPANIES", 1);
+//		ResponseEntity<Company[]> AllCompaniesResponseEntity = restTemplate.//
+//				exchange(allCompaniesURL, HttpMethod.GET, allCompanieshttpEntity, Company[].class); // NOT
+//		System.out.println(AllCompaniesResponseEntity.getStatusCode());
+//		ArtUtils.insertToTable("All Companies: ", Arrays.asList(AllCompaniesResponseEntity.getBody()));
+//
+//		// TODO admin methods Rest...
 
 ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////LOGIN SUCCESS M&M COMPANY ///////////////////////////////
@@ -121,7 +121,6 @@ public class F_Project3Test implements CommandLineRunner {
 			LoginResponse companyToken = new ObjectMapper().readerFor(LoginResponse.class).readValue(loginResponse);
 			companyTokenId = companyToken.getTokenId();
 		}
-
 		//////////////////////// ParameterizedTypeReference
 		//////////////////////// //////////////////////////////////////
 
@@ -155,7 +154,7 @@ public class F_Project3Test implements CommandLineRunner {
 ///////////////////////////GET COUPONS of M&M COMPANY ///////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 //		ArtUtils.printVvsHeadLine("Get Company Coupons!", 1);
-//		String getAllCompanyCouponURL = localhostURL + "/company/myCoupons";
+//		String getAllCompanyCouponURL = localhostURL + "/company/all";
 //		HttpHeaders companyTokenIdHeader = new HttpHeaders();
 //		companyTokenIdHeader.add("tokenId", companyTokenId);
 //		HttpEntity<?> companyTokenIdHttpEntity = new HttpEntity<>(companyTokenIdHeader); // !!!TOKEN-ID!!!
@@ -174,7 +173,7 @@ public class F_Project3Test implements CommandLineRunner {
 //
 //		Category category = Category.SHOPING;
 //		ArtUtils.printVvsHeadLine("Company Coupons by catrgory: " + category.name(), 1);
-//		String CompanyCouponByCategoryURL = localhostURL + "/company/myCouponsByCategory";
+//		String CompanyCouponByCategoryURL = localhostURL + "/company/category";
 //		HttpHeaders companyHeaderCouponsByCategory = new HttpHeaders();
 //		companyHeaderCouponsByCategory.add("tokenId", companyTokenId);
 //		companyHeaderCouponsByCategory.add("category", category.name());
@@ -194,7 +193,7 @@ public class F_Project3Test implements CommandLineRunner {
 /////////////////////////////GET COUPON of M&M COMPANY  BY MAX PRICE ///////////////////////////////
 //		String maxPrice = "70.0";
 //		ArtUtils.printVvsHeadLine("Company Coupons by MAX PRICE of: " + maxPrice, 1);
-//		String CompanyCouponByMaxPriceURL = localhostURL + "/company/myCouponsByMaxPrice";
+//		String CompanyCouponByMaxPriceURL = localhostURL + "/company/maxPrice";
 //		HttpHeaders companyHeaderCouponsByMaxPrice = new HttpHeaders();
 //		companyHeaderCouponsByMaxPrice.add("tokenId", companyTokenId);
 //		companyHeaderCouponsByMaxPrice.add("maxPrice", maxPrice);
@@ -231,7 +230,7 @@ public class F_Project3Test implements CommandLineRunner {
 /////////////////////////////Get M&M Company Details ///////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 //		ArtUtils.printVvsHeadLine("GET Company details", 1);
-//		String getMyCompanyURL = localhostURL + "/company/getCompanyDetails";
+//		String getMyCompanyURL = localhostURL + "/company/details";
 //		ResponseEntity<Company> getMyCompanyResponseEntity = restTemplate.//
 //				exchange(getMyCompanyURL, HttpMethod.GET, companyTokenIdHttpEntity, Company.class); // NOT
 //		Company myCompany = getMyCompanyResponseEntity.getBody();
@@ -270,7 +269,7 @@ public class F_Project3Test implements CommandLineRunner {
 //////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////GET COUPONS of M&M COMPANY ///////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
-//
+//		
 //		getAllMyCouponsResponseEntity = restTemplate.//
 //				exchange(getAllCompanyCouponURL, HttpMethod.GET, companyTokenIdHttpEntity, String.class); // NOT
 //

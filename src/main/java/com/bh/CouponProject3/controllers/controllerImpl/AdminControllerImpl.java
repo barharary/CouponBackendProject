@@ -35,7 +35,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 		super(loginManager, tokenManager);
 	}
 
-	@PostMapping("/addCompany")
+	@PostMapping("/company")
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> addCompany(@RequestHeader(name = "tokenId") String tokenId, @RequestBody Company company)
@@ -45,7 +45,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 		return new ResponseEntity<>(HttpStatus.CREATED); //
 	}
 
-	@PutMapping("/UpdateCompany")
+	@PutMapping("/company")
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> updateCompany(@RequestHeader(name = "tokenId") String tokenId,
@@ -55,7 +55,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 
 	}
 
-	@DeleteMapping("/deleteCompany/{companyId}")
+	@DeleteMapping("/company/{companyId}")
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> deleteCompany(@RequestHeader(name = "tokenId") String tokenId, @PathVariable int companyId)
@@ -64,7 +64,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	@GetMapping("/allCompanies")
+	@GetMapping("/company/all")
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> getAllCompanies(@RequestHeader(name = "tokenId") String tokenId)
@@ -73,7 +73,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	}
 
 	@Override
-	@GetMapping("/OneCompany/{companyId}")
+	@GetMapping("/company/{companyId}")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN) // AOP :)
 	public ResponseEntity<?> getOneCompany(@RequestHeader(name = "tokenId") String tokenId, @PathVariable int companyId)
 			throws CompanyException, SecurityException {
@@ -82,7 +82,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	}
 
 	@Override
-	@PostMapping("/addCustomer")
+	@PostMapping("/customer")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> addCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestBody Customer customer) throws CustomerException {
@@ -92,7 +92,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	}
 
 	@Override
-	@PutMapping("/UpdateCustomer")
+	@PutMapping("/customer")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> updateCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestBody Customer customer) throws CustomerException {
@@ -102,7 +102,7 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	}
 
 	@Override
-	@DeleteMapping("/deleteCustomer/{customerId}")
+	@DeleteMapping("/customer/{customerId}")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> deleteCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@PathVariable int customerId) throws CustomerException, SecurityException {
@@ -111,14 +111,14 @@ public class AdminControllerImpl extends ClientController implements AdminContro
 	}
 
 	@Override
-	@GetMapping("/AllCustomers")
+	@GetMapping("/customer/all")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> getAllCustomers(@RequestHeader(name = "tokenId") String tokenId) throws SecurityException {
 		return new ResponseEntity<>(((AdminService) tokenManager.getService(tokenId)).getAllCustomers(), HttpStatus.OK);
 	}
 
 	@Override
-	@GetMapping("/OneCustomer/{customerId}")
+	@GetMapping("/customer/{customerId}")
 	@TokenCheckAndUpdate(clientType = ClientType.ADMIN)
 	public ResponseEntity<?> getOneCustomer(@RequestHeader(name = "tokenId") String tokenId,
 			@PathVariable int customerId) throws CustomerException, CompanyException, SecurityException {

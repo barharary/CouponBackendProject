@@ -1,4 +1,4 @@
-package com.bh.CouponProject3.exceptions.advice;
+ package com.bh.CouponProject3.exceptions.advice;
 
 import javax.security.auth.login.LoginException;
 
@@ -21,7 +21,7 @@ public class ClientControllerAdvice {
 	@ExceptionHandler(value = { CustomerException.class, CouponException.class, CompanyException.class })
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorDetails handleErrors(Exception e) {
-		return new ErrorDetails("Data problem: ", (e.getMessage() == null) ? "cause: " + e.getCause().getMessage() : "message: " + e.getMessage(), 400);
+		return new ErrorDetails("Data problem: ", (e.getMessage() == null) ? e.getCause().getMessage() :e.getMessage(), 444);
 	} // key,value,code
 
 	// SEC EXCEPTION Oy Vey!!!

@@ -41,7 +41,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 		if (!companyRepository.existsByIdAndName(company.getId(), company.getName())) {
 			throw new CompanyException("Cannot change ID or name of the company.");
 		}
-		if (companyRepository.existsByEmail(company.getEmail())) {
+		if (companyRepository.existsByEmail(company.getEmail()) && company.getEmail() != getOneCompany(company.getId()).getEmail()) {
 			throw new CompanyException("Email already in use.");
 		}
 		companyRepository.saveAndFlush(company);

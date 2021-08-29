@@ -1,4 +1,4 @@
-package com.bh.CouponProject3.threads;
+package com.bh.CouponProject3.tasks;
 
 import java.util.Date;
 
@@ -22,8 +22,9 @@ public class TokenExpirationJob {
 	public void run() {
 		ArtUtils.printThreadHeadline();
 		ArtUtils.insertToTable("TOKEN DELETION JOB ==> Before deletion: ", tokenManager.getMap());
+		
 		tokenManager.getMap().entrySet() // testing time
-				.removeIf(entrySet -> (entrySet.getValue().getExpiredTime() < new Date().getTime() - (1000 * 60))
+		.removeIf(entrySet -> (entrySet.getValue().getExpiredTime() < new Date().getTime() - (1000 * 60))
 						|| (entrySet.getValue().getExpiredTime() > (new Date().getTime()) + 1000 * 60 * 30));
 		ArtUtils.insertToTable("TOKEN DELETION JOB ==> After deletion: ", tokenManager.getMap());
 		System.out.println("\t\t\t\t" + ArtUtils.getSmaily() + "   ---   " + ArtUtils.getSmaily());

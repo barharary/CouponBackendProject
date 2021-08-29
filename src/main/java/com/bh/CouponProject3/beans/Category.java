@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 public enum Category {
 
-	FOOD(1), SHOPING(2), TRIP(3);
+	FOOD(1), SHOPING(2), TRIP(3), TECH(4);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

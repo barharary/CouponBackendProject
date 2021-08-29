@@ -34,5 +34,13 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 	@Transactional
 	@Modifying
 	void deleteByEndDateBefore(Date date);
+	
+	@Query(value = "select count(*) from " 
+			+ "customers_vs_coupons", nativeQuery = true)
+	Integer countCustomersvCoupons();
+	
+	@Query(value = "SELECT sum(amount) FROM coupons;", //
+			nativeQuery = true)
+	Integer countTotlaAmount();
 
 }

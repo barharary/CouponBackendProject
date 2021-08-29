@@ -1,4 +1,4 @@
-package com.bh.CouponProject3.threads;
+package com.bh.CouponProject3.tasks;
 
 import java.util.Date;
 

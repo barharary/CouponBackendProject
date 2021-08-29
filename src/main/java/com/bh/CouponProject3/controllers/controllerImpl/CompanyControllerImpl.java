@@ -64,7 +64,7 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	}
 
 	@Override
-	@GetMapping("/myCoupons")
+	@GetMapping("/all")
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId) throws CouponException {
 		return new ResponseEntity<>(((CompanyService) tokenManager.getService(tokenId)).getComapnyCoupons(),
@@ -73,7 +73,7 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 
 	@Override
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
-	@GetMapping("myCouponsByCategory")
+	@GetMapping("/category")
 	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestHeader Category category) {
 		return new ResponseEntity<>(((CompanyService) tokenManager.getService(tokenId)).getComapnyCoupons(category),
@@ -81,7 +81,7 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	}
 
 	@Override
-	@GetMapping("/myCouponsByMaxPrice")
+	@GetMapping("/maxPrice")
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> getComapnyCoupons(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestHeader double maxPrice) {
@@ -90,7 +90,7 @@ public class CompanyControllerImpl extends ClientController implements CompanyCo
 	}
 
 	@Override
-	@GetMapping("/getCompanyDetails")
+	@GetMapping("/details")
 	@TokenCheckAndUpdate(clientType = ClientType.COMPANY)
 	public ResponseEntity<?> getCompanyDetails(@RequestHeader(name = "tokenId") String tokenId)
 			throws CompanyException {

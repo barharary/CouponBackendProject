@@ -33,7 +33,7 @@ import lombok.Singular;
 @Builder
 @Table(name = "companies")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityJsonResolver.class, scope = Company.class)
-@JsonPropertyOrder(value = {"name","email","password","companyCoupons","id"},alphabetic = true )
+@JsonPropertyOrder(value = { "name", "email", "password", "companyCoupons", "id" }, alphabetic = true)
 //@JsonPropertyOrder(alphabetic = false)
 public class Company {
 
@@ -54,11 +54,11 @@ public class Company {
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REFRESH, CascadeType.PERSIST,
 			CascadeType.REMOVE }, mappedBy = "company")
 	@JsonIgnoreProperties("company")
-	private List<Coupon> companyCoupons = new ArrayList<>();
+	private List<Coupon> coupons = new ArrayList<>();
 
 	@Override
 	public String toString() {
 		return "|" + id + "\t|" + name + "    \t|" + email + "    \t\t|" + password + "  \t\t|"
-				+ companyCoupons.stream().map(c -> c.getId()).sorted().collect(Collectors.toList()) + "\t\t\t\t\t|";
+				+ coupons.stream().map(c -> c.getId()).sorted().collect(Collectors.toList()) + "\t\t\t\t\t|";
 	}
 }
