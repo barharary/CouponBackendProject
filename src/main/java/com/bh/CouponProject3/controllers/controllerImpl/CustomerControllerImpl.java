@@ -36,7 +36,6 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	@TokenCheckAndUpdate(clientType = ClientType.CUSTOMER)
 	public ResponseEntity<?> getMyCustomerCoupon(@RequestHeader(name = "tokenId") String tokenId) {
 		CustomerService customerService = ((CustomerService) tokenManager.getService(tokenId));
-		System.out.println("this is the customerId: " + customerService.getCustomerId());
 		return new ResponseEntity<>(((CustomerService) tokenManager.getService(tokenId)).getMyCustomerCoupon(),
 				HttpStatus.OK);
 	} 
@@ -47,7 +46,6 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	public ResponseEntity<?> getMyCustomerCoupon(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestHeader Category category) {
 		CustomerService customerService = ((CustomerService) tokenManager.getService(tokenId));
-		System.out.println("this is the customerId: " + customerService.getCustomerId());
 		return new ResponseEntity<>(((CustomerService) tokenManager.getService(tokenId)).getMyCustomerCoupon(category),
 				HttpStatus.OK);
 	}
@@ -58,7 +56,6 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	public ResponseEntity<?> getMyCustomerCoupon(@RequestHeader(name = "tokenId") String tokenId,
 			@RequestHeader double maxPrice) {
 		CustomerService customerService = ((CustomerService) tokenManager.getService(tokenId));
-		System.out.println("this is the customerId: " + customerService.getCustomerId());
 		return new ResponseEntity<>(((CustomerService) tokenManager.getService(tokenId)).getMyCustomerCoupon(maxPrice),
 				HttpStatus.OK);
 	}
@@ -69,7 +66,6 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	public ResponseEntity<?> getCustomerDetails(@RequestHeader(name = "tokenId") String tokenId)
 			throws CustomerException {
 		CustomerService customerService = ((CustomerService) tokenManager.getService(tokenId));
-		System.out.println("this is the customerId: " + customerService.getCustomerId());
 		return new ResponseEntity<>(((CustomerService) tokenManager.getService(tokenId)).getCustomerDetails(),
 				HttpStatus.OK);
 	}
@@ -79,7 +75,6 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	@TokenCheckAndUpdate(clientType = ClientType.CUSTOMER)
 	public ResponseEntity<?> getListOfCouponToChooseFrom(@RequestHeader(name = "tokenId") String tokenId) {
 		CustomerService customerService = ((CustomerService) tokenManager.getService(tokenId));
-		System.out.println("this is the customerId: " + customerService.getCustomerId());
 		return new ResponseEntity<>(((CustomerService) tokenManager.getService(tokenId)).getListOfCouponToChooseFrom(),
 				HttpStatus.OK);
 	}
@@ -89,10 +84,8 @@ public class CustomerControllerImpl extends ClientController implements Customer
 	@TokenCheckAndUpdate(clientType = ClientType.CUSTOMER)
 	public ResponseEntity<?> purchaseCoupon(@RequestHeader(name = "tokenId") String tokenId, @RequestBody Coupon coupon)
 			throws CouponException {
-		System.out.println(coupon);
 		CustomerService customerService = ((CustomerService) tokenManager.getService(tokenId));
 		customerService.purchaseCoupon(coupon);
-		System.out.println("this is the customerId: " + customerService.getCustomerId());
 		return new ResponseEntity<>(HttpStatus.CREATED); // TODO 1. Swagger filter client only to choose from id and
 															// show the title and description and endDate
 	}
